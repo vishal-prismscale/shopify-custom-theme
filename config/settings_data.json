@@ -1,4 +1,96 @@
 {
   "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show-announcement": true,
+          "background_color": "#fff",
+          "text_color": "#000"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+        }
+      },
+      "banner": {
+        "type": "banner",
+        "settings": {
+          "show_banner": true,
+          "background_color": "#fff",
+          "text_color": "#000"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "quick_link_YgDd4B": {
+            "type": "quick_link",
+            "settings": {
+              "label": "Home",
+              "url": "\/"
+            }
+          },
+          "quick_link_mVRt3g": {
+            "type": "quick_link",
+            "settings": {
+              "label": "About us",
+              "url": "#"
+            }
+          },
+          "quick_link_MAQdJY": {
+            "type": "quick_link",
+            "settings": {
+              "label": "Collection",
+              "url": "#"
+            }
+          },
+          "quick_link_tCeFx7": {
+            "type": "quick_link",
+            "settings": {
+              "label": "Home",
+              "url": "\/"
+            }
+          },
+          "quick_link_K6FMV6": {
+            "type": "quick_link",
+            "settings": {
+              "label": "Contact",
+              "url": "#"
+            }
+          },
+          "social_media_ihHmFr": {
+            "type": "social_media",
+            "settings": {
+              "label": "Facebook",
+              "url": "https:\/\/facebook.com",
+              "icon": "shopify:\/\/shop_images\/51O-wf-l8zL._SX425.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "quick_link_YgDd4B",
+          "quick_link_mVRt3g",
+          "quick_link_MAQdJY",
+          "quick_link_tCeFx7",
+          "quick_link_K6FMV6",
+          "social_media_ihHmFr"
+        ],
+        "settings": {
+          "footer_background": "#333",
+          "footer_text_color": "#fff",
+          "footer_link_color": "#fff",
+          "quick_links_heading": "Quick Links",
+          "contact_heading": "Contact Us",
+          "contact_text": "We would love to hear from you. Reach out to us anytime.",
+          "contact_email": "info@example.com",
+          "social_heading": "Follow Us"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
   }
 }

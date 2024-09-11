@@ -20,14 +20,14 @@
         color: {{ section.settings.text_color }};
         max-width: calc(var(--desktop-max-width) - 30%);
         margin-inline: auto;
-        margin-top: var(--section-block-spacing);
+        padding-block: var(--section-block-spacing);
         text-align: {{ section.settings.content_alignment }};
 
         .more-info-heading {
-            font-size: 38px;
+            font-size: {{ section.settings.heading_font_size }}px;
         }
         .more-info-paragraph {
-            font-size: 20px;
+            font-size: {{ section.settings.paragraph_font_size }}px;
         }
         .more-info-button {
             padding: 10px 30px;
@@ -68,10 +68,28 @@
       "default": "Please Buy Every Merchaindise From Our Store."
     },
     {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size (px)",
+      "default": 38,
+      "step": 1,
+      "min": 24,
+      "max": 40
+    },
+    {
       "type": "text",
       "id": "more_info_paragraph",
       "label": "Paragraph",
       "default": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos, officiis culpa est natus corporis dolores facilis nostrum quibusdam non dolor aliquid atque minus ex ullam neque cum a magnam quidem!"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size",
+      "label": "Paragraph Font Size (px)",
+      "default": 20,
+      "step": 1,
+      "min": 16,
+      "max": 24
     },
     {
       "type": "text",

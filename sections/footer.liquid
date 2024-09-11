@@ -1,0 +1,183 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-section quick-links">
+      <h4 class="footer-heading">{{ section.settings.quick_links_heading }}</h4>
+      <ul class="footer-links">
+        {% for block in section.blocks %}
+          {% if block.type == 'quick_link' %}
+            <li>
+              <a href="{{ block.settings.url }}" class="footer-link">{{ block.settings.label }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-section contact-info">
+      <h4 class="footer-heading">{{ section.settings.contact_heading }}</h4>
+      <p>{{ section.settings.contact_text }}</p>
+      <p>{{ section.settings.contact_email }}</p>
+    </div>
+
+    <div class="footer-section">
+      <h4 class="footer-heading">{{ section.settings.social_heading }}</h4>
+      <ul class="social-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'social_media' %}
+            <li>
+              <a href="{{ block.settings.url }}">
+                <img src="{{ block.settings.icon | image_url }}" alt="{{ block.settings.label }}" height="20" width="20">
+                <span>{{ block.settings.label }}</span>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+{% comment %} Footer CSS Styles {% endcomment %}
+<style>
+  .site-footer {
+    background-color: {{ section.settings.footer_background }};
+    color: {{ section.settings.footer_text_color }};
+    padding: 40px 0;
+  }
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: var(--desktop-max-width);
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .footer-section {
+    margin: 20px 0;
+  }
+  .footer-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .social-list {
+
+    li a {
+        display: flex;
+        gap: .3rem;
+    }
+
+  }
+  .footer-link {
+    color: {{ section.settings.footer_link_color }};
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "footer_background",
+      "label": "Footer Background Color",
+      "default": "#333"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Footer Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "footer_link_color",
+      "label": "Footer Link Color",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "quick_links_heading",
+      "label": "Quick Links Heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact Information Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "We would love to hear from you. Reach out to us anytime."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email",
+      "default": "info@example.com"
+    },
+    {
+      "type": "text",
+      "id": "social_heading",
+      "label": "Social Media Heading",
+      "default": "Follow Us"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quick_link",
+      "name": "Quick Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link Label",
+          "default": "Home"
+        },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "Link URL",
+          "default": "/"
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "Social Media",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Social Media Label",
+          "default": "Facebook"
+        },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "Social Media URL",
+          "default": "https://facebook.com"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Social Media Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
