@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner",
+      "custom_css": [
+        "section {color: \"red\"; padding: \"30px\"}"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "banner"
+  ]
+}
