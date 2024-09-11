@@ -1,0 +1,109 @@
+<section>
+  <div class="more-info-wrapper">
+    <h1 class="more-info-heading">
+      {{ section.settings.more_info_heading }}
+    </h1>
+    <p class="more-info-paragraph">
+      {{ section.settings.more_info_paragraph }}
+    </p>
+    <button class="more-info-button">
+      {{ section.settings.more_info_button }}
+    </button>
+  </div>
+</section>
+
+
+{% comment %} Inline Styling {% endcomment %}
+ <style>
+    .more-info-wrapper {
+        background-color: {{ section.settings.background_color }};
+        color: {{ section.settings.text_color }};
+        max-width: calc(var(--desktop-max-width) - 30%);
+        margin-inline: auto;
+        margin-top: var(--section-block-spacing);
+        text-align: {{ section.settings.content_alignment }};
+
+        .more-info-heading {
+            font-size: 38px;
+        }
+        .more-info-paragraph {
+            font-size: 20px;
+        }
+        .more-info-button {
+            padding: 10px 30px;
+            border-radius: 10px;
+            background-color: var(--accent-color);
+            transition: opacity .200ms ease-in;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+        .more-info-button:hover {
+            opacity: .9;
+        }
+        .more-info-button:active {
+            opacity: 1;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+        }
+    }
+ </style>
+
+{% schema %}
+{
+  "name": "More Info",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
+    },
+    {
+      "type": "text",
+      "id": "more_info_heading",
+      "label": "Heading",
+      "default": "Please Buy Every Merchaindise From Our Store."
+    },
+    {
+      "type": "text",
+      "id": "more_info_paragraph",
+      "label": "Paragraph",
+      "default": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos, officiis culpa est natus corporis dolores facilis nostrum quibusdam non dolor aliquid atque minus ex ullam neque cum a magnam quidem!"
+    },
+    {
+      "type": "text",
+      "id": "more_info_button",
+      "label": "Button Text",
+      "default": "Shop"
+    },
+    {
+        "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "default": "left",
+      "options": [
+        {
+            "label": "Left",
+            "value": "left"
+        },
+        {
+            "label": "Center",
+            "value": "center"
+        },
+        {
+            "label": "Right",
+            "value": "right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+        "name": "more-info"
+    }
+  ]
+}
+{% endschema %}

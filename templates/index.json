@@ -3,9 +3,14 @@
     "three-images-column": {
       "type": "three-images-column",
       "settings": {}
+    },
+    "more-info": {
+      "type": "more-info",
+      "settings": {}
     }
   },
   "order": [
-    "three-images-column"
+    "three-images-column",
+    "more-info"
   ]
 }

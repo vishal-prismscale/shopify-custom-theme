@@ -9,6 +9,13 @@
     --muted-text-color: #6c757d;
     --border-color: #dee2e6;
     --hover-color: #0056b3;
+
+
+    --desktop-max-width: 1200px;
+
+    --section-block-spacing: 4rem;
+    --section-inline-spacing: 1rem;
+
 }
 
 
