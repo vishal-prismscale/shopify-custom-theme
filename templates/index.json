@@ -1,20 +1,11 @@
 {
   "sections": {
-    "banner": {
-      "type": "banner",
-      "custom_css": [
-        "section {color: \"red\"; padding: \"30px\"}"
-      ],
-      "settings": {
-      }
-    },
     "three-images-column": {
       "type": "three-images-column",
       "settings": {}
     }
   },
   "order": [
-    "banner",
     "three-images-column"
   ]
 }

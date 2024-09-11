@@ -1,0 +1,56 @@
+<section>
+    <div class="three-images-column-wrapper">
+        <div class="hero-image-container">
+        {% if section.settings.image %}
+             <img src="{{ 'section.settings.image' | image_url }}" alt="" width="100%" height="100%">   
+             {% else %}
+             <img  src="{{  'hero-first-image.jpg' | asset_url }}" alt="" width="100%" height="100%">   
+        {% endif %}
+        </div>
+        <div class="hero-image-container">
+        {% if section.settings.image_2 %}
+             <img src="{{ 'section.settings.image' | image_url }}" alt="" width="100%" height="100%">   
+             {% else %}
+             <img  src="{{  'hero-second-image.jpg' | asset_url }}" alt="" width="100%" height="100%">   
+        {% endif %}
+        </div>
+        <div class="hero-image-container">
+        {% if section.settings.image_3 %}
+             <img src="{{ 'section.settings.image' | image_url }}" alt="" width="100%" height="100%">   
+             {% else %}
+             <img  src="{{  'hero-third-image.jpg' | asset_url }}" alt="" width="100%" height="100%">   
+        {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Three Images Column",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "400 x 120 .png recommended"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2",
+        "info": "400 x 120 .png recommended"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3",
+        "info": "400 x 120 .png recommended"
+    }
+  ],
+  "presets": [
+    {
+        "name": "three-images-column"
+    }
+  ]
+}
+{% endschema %}
