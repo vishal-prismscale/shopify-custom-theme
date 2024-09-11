@@ -25,8 +25,8 @@
         {% for block in section.blocks %}
           {% if block.type == 'social_media' %}
             <li>
-              <a href="{{ block.settings.url }}">
-                <img src="{{ block.settings.icon | image_url }}" alt="{{ block.settings.label }}" height="20" width="20">
+              <a href="{{ block.settings.url }}" class="footer-link">
+                <img src="{{ block.settings.icon | image_url }}" alt="{{ block.settings.label }}" height="15" width="15">
                 <span>{{ block.settings.label }}</span>
               </a>
             </li>
@@ -63,7 +63,7 @@
 
     li a {
         display: flex;
-        gap: .3rem;
+        gap: .5rem;
     }
 
   }
@@ -71,6 +71,7 @@
     color: {{ section.settings.footer_link_color }};
     text-decoration: none;
     font-size: 16px;
+    padding: 2px 0px;
   }
   .footer-link:hover {
     text-decoration: underline;

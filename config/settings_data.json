@@ -5,8 +5,8 @@
         "type": "announcement-bar",
         "settings": {
           "show-announcement": true,
-          "background_color": "#fff",
-          "text_color": "#000"
+          "background_color": "#ffffff",
+          "text_color": "#000000"
         }
       },
       "header": {
@@ -18,8 +18,8 @@
         "type": "banner",
         "settings": {
           "show_banner": true,
-          "background_color": "#fff",
-          "text_color": "#000"
+          "background_color": "#ffffff",
+          "text_color": "#000000"
         }
       },
       "footer": {
@@ -65,7 +65,31 @@
             "settings": {
               "label": "Facebook",
               "url": "https:\/\/facebook.com",
-              "icon": "shopify:\/\/shop_images\/51O-wf-l8zL._SX425.jpg"
+              "icon": "shopify:\/\/shop_images\/5968764.png"
+            }
+          },
+          "social_media_TTWteH": {
+            "type": "social_media",
+            "settings": {
+              "label": "Instagram",
+              "url": "#",
+              "icon": "shopify:\/\/shop_images\/4138124.png"
+            }
+          },
+          "social_media_ttyJJ7": {
+            "type": "social_media",
+            "settings": {
+              "label": "Linkedin",
+              "url": "#",
+              "icon": "shopify:\/\/shop_images\/4494497.png"
+            }
+          },
+          "social_media_jqiAWr": {
+            "type": "social_media",
+            "settings": {
+              "label": "X",
+              "url": "#",
+              "icon": "shopify:\/\/shop_images\/5969020.png"
             }
           }
         },
@@ -75,12 +99,15 @@
           "quick_link_MAQdJY",
           "quick_link_tCeFx7",
           "quick_link_K6FMV6",
-          "social_media_ihHmFr"
+          "social_media_ihHmFr",
+          "social_media_TTWteH",
+          "social_media_ttyJJ7",
+          "social_media_jqiAWr"
         ],
         "settings": {
-          "footer_background": "#333",
-          "footer_text_color": "#fff",
-          "footer_link_color": "#fff",
+          "footer_background": "#333333",
+          "footer_text_color": "#ffffff",
+          "footer_link_color": "#ffffff",
           "quick_links_heading": "Quick Links",
           "contact_heading": "Contact Us",
           "contact_text": "We would love to hear from you. Reach out to us anytime.",
