@@ -1,14 +1,114 @@
-<section>
+{% if section.settings.show_banner %}
+  <section>
+    <div class="banner-wrapper">
+      <ul class="moving-text-list">
+        {% if section.blocks.size == 0 %}
+          <li class="banner-slide-text" id="slide-text">Upto 50%</li>
+          <li class="banner-slide-text">On Sale</li>
+          <li class="banner-slide-text">Buy Now</li>
+          {% else %}
+         {% for block in section.blocks %}
+           <li class="banner-slide-text">
+            {{ block.settings.moving_text }}
+           </li>
+         {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+  </section>
+{% endif %}
+
+{% comment %} Inline styling {% endcomment %}
+
+<style>
+  .banner-wrapper {
+    color: {{ section.settings.text_color }};
+    background-color: {{ section.settings.background_color }};
+    position: relative;
+  }
+
+  .banner-slide-text {
+    position: absolute;
+    left: -150%;
+    transform: translate(0, -50%)
+    padding: 20px;
+    font-size: "20px";
+    transition: left 0.5s ease-in-out;
+  }
   
-</section>
+</style>
+
+
+{% comment %} Inline Javascript {% endcomment %}
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sliding_texts = document.querySelectorAll(".banner-slide-text");
+    let currentTextIndex = 0;
+
+    const slideToMiddle = (element) => {
+      element.style.left = "40%"
+    }
+
+    const resetTextPosition = (element) => {
+      element.style.left = "-100%"
+    }
+
+    const slideNextText = () => {
+      resetTextPosition(sliding_texts[currentTextIndex])
+      currentTextIndex = (currentTextIndex + 1) % sliding_texts.length;
+      slideToMiddle(sliding_texts[currentTextIndex])
+    }
+
+    setInterval(slideNextText, 3000)
+  })
+</script>
+
+
+
+{% comment %} Theme customization options {% endcomment %}
 
 {% schema %}
 {
-  "name": "Banner",
-  "settings": [],
+  "name": "Moving Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "Show Moving Banner",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000"
+    }
+  ],
   "presets": [
     {
       "name": "banner"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "text",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "moving_text",
+          "label": "Text"
+        }
+      ]
     }
   ]
 }

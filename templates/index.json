@@ -7,9 +7,14 @@
       ],
       "settings": {
       }
+    },
+    "three-images-column": {
+      "type": "three-images-column",
+      "settings": {}
     }
   },
   "order": [
-    "banner"
+    "banner",
+    "three-images-column"
   ]
 }
