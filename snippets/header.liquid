@@ -1,9 +1,22 @@
 <div class="header-wrapper">
   <div>
     <a href="/">
-      <img src="{{ 'logo.jpg' | asset_url }}" alt="" height="45" width="45" loading="lazy">
+      <img class="nav-logo" src="{{ 'logo.jpg' | asset_url }}" alt="" height="45" width="45" loading="lazy">
     </a>
   </div>
-  <div></div>
-  <div></div>
+  <div>
+    <ul class="header-middle-nav-list">
+      {% for link in linklists["main-menu"].links %}
+        <li>{{ link.title |  link_to: link.url }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="header-right-items">
+    <form action="/search">
+      <input type="search" placeholder="search" class="search-nav-input" type="search">
+    </form>
+      <a href="#">
+        <img src="{{ 'shopping-bar.svg' |  asset_url }}" alt="" height="30" width="30" loading="lazy">
+      </a>
+  </div>
 </div>
