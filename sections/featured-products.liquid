@@ -1,0 +1,167 @@
+{% liquid
+  assign collection_name = section.settings.collection_name
+  if collection_name == blank
+   assign collection_name = "aot_merchandise"
+  endif
+  assign collection = collections[collection_name].products
+%}
+
+<section>
+  <div class="featured-products-section-container">
+    <div class="featured-products-section-wrapper">
+    <h1 class="featured-products-section-title">
+      {{ section.settings.fetatured_products_section_title }}
+    </h1>
+    <div class="featured-products-wrapper">
+      {% if collection.size > 0 %}
+        {% for product in collection %}
+        <a href="{{ product.url }}" class="featured-product-card">
+          <div class="featured-product-card-image-container">
+            <img src="{{ product.featured_image | image_url }}" alt="" height="100%" width="100%" loading="lazy">
+          </div>
+          <div class="featured-product-card-details">
+            <span class="featured-product-card-title">{{ product.title | truncate: 40 }}</span>
+            <br /><br />
+            <span class="featured-product-card-stroke-price">{{ product.compare_at_price | money }}</span>
+            <span class="featured-product-card-price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% endfor %}
+        {% else %}
+        <p>No products found in this collection.</p>
+      {% endif %}
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+   .featured-products-section-container {
+      background-color: {{ section.settings.background_color }};
+      color: {{ section.settings.text_color }};
+   }
+    .featured-products-section-wrapper {
+        max-width: var(--desktop-max-width);
+        margin-inline: auto;
+        padding-block: 1rem;
+    }
+    .featured-products-section-title {
+      font-size: {{ section.settings.heading_font_size }}px;
+      margin-top: 0;
+    }
+    .featured-products-wrapper {
+      display: grid;
+      grid-template-columns: repeat({{ section.settings.product_columns_size }}, 1fr);
+      gap: {{ section.settings.product_columns_gap }}px;
+  }
+  .featured-product-card {
+     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+     padding: 1rem;
+     border-radius: 10px;
+     overflow: clip;
+     transition: all ease-in-out 100ms;
+    
+      .featured-product-card-image-container {
+        width: 100%;
+        aspect-ratio: 1/1;
+      }
+    }
+   .featured-product-card:hover {
+      transform: scale(1.01);
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 12px 0px;
+    }
+    .featured-product-card-details {
+        margin-top: .5rem;
+    }
+    .featured-product-card-title {
+        font-size: 20px;
+        font-weight: 700;
+    }
+  .featured-product-card-stroke-price {
+        text-decoration: line-through;
+        font-weight: 600;
+        padding-right: .3rem;
+  }
+  .featured-product-card-price {
+        color: red;
+        font-weight: 600;
+  }
+
+
+
+  @media (max-width: 992px) {
+      .featured-products-wrapper {
+          grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+  @media (max-width: 578px) {
+      .featured-products-wrapper {
+          grid-template-columns: repeat(2, 1fr);
+      }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_name",
+      "label": "Choose Collection",
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "fetatured_products_section_title",
+      "label": "Section Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size",
+      "default": 34,
+      "step": 1,
+      "min": 20,
+      "max": 38
+    },
+    {
+      "type": "range",
+      "id": "product_columns_size",
+      "label": "Columns",
+      "default": 4,
+      "step": 1,
+      "min": 2,
+      "max": 5
+    },
+    {
+      "type": "range",
+      "id": "product_columns_gap",
+      "label": "Spacing Between Products",
+      "default": 16,
+      "step": 1,
+      "min": 0,
+      "max": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": "Custom Section"
+    }
+  ]
+}
+{% endschema %}

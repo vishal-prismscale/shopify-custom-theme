@@ -2,15 +2,37 @@
   "sections": {
     "three-images-column": {
       "type": "three-images-column",
-      "settings": {}
+      "settings": {
+      }
     },
     "more-info": {
       "type": "more-info",
-      "settings": {}
+      "settings": {
+        "background_color": "",
+        "text_color": "",
+        "more_info_heading": "Please Buy Every Merchaindise From Our Store.",
+        "heading_font_size": 38,
+        "more_info_paragraph": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos, officiis culpa est natus corporis dolores facilis nostrum quibusdam non dolor aliquid atque minus ex ullam neque cum a magnam quidem!",
+        "paragraph_font_size": 20,
+        "more_info_button": "Shop",
+        "content_alignment": "left"
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "fetatured_products_section_title": "Featured Products",
+        "heading_font_size": 34,
+        "product_columns_size": 4,
+        "product_columns_gap": 16
+      }
     }
   },
   "order": [
     "three-images-column",
-    "more-info"
+    "more-info",
+    "featured-products"
   ]
 }
