@@ -6,34 +6,56 @@
   assign collection = collections[collection_name].products
 %}
 
+{% liquid
+  assign collection_name = section.settings.collection_name
+  if collection_name == blank
+   assign collection_name = "aot_merchandise"
+  endif
+  assign collection = collections[collection_name].products
+%}
+
 <section>
   <div class="featured-products-section-container">
     <div class="featured-products-section-wrapper">
-    <h1 class="featured-products-section-title">
-      {{ section.settings.fetatured_products_section_title }}
-    </h1>
-    <div class="featured-products-wrapper">
-      {% if collection.size > 0 %}
-        {% for product in collection %}
-        <a href="{{ product.url }}" class="featured-product-card">
-          <div class="featured-product-card-image-container">
-            <img src="{{ product.featured_image | image_url }}" alt="" height="100%" width="100%" loading="lazy">
-          </div>
-          <div class="featured-product-card-details">
-            <span class="featured-product-card-title">{{ product.title | truncate: 40 }}</span>
-            <br /><br />
-            <span class="featured-product-card-stroke-price">{{ product.compare_at_price | money }}</span>
-            <span class="featured-product-card-price">{{ product.price | money }}</span>
-          </div>
-        </a>
-      {% endfor %}
+      <h1 class="featured-products-section-title">
+        {{ section.settings.featured_products_section_title }}
+      </h1>
+      <div class="featured-products-wrapper">
+        {% if collection.size > 0 %}
+          {% for product in collection %}
+            <div class="featured-product-card">
+              <a href="{{ product.url }}" class="featured-product-card-link">
+                <div class="featured-product-card-image-container">
+                  <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" height="100%" width="100%" loading="lazy">
+                </div>
+                <div class="featured-product-card-details">
+                  <span class="featured-product-card-title">{{ product.title | truncate: 40 }}</span>
+                  <br /><br />
+                  {% if product.compare_at_price > product.price %}
+                    <span class="featured-product-card-stroke-price">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="featured-product-card-price">{{ product.price | money }}</span>
+                </div>
+              </a>
+
+              {% if product.variants.first.available %}
+                <form action="/cart/add" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                  <button type="submit" class="featured-card-add-to-cart-btn">Add to Cart</button>
+                </form>
+              {% else %}
+                <p class="featured-card-sold-out">Sold Out</p>
+              {% endif %}
+            </div>
+          {% endfor %}
         {% else %}
-        <p>No products found in this collection.</p>
-      {% endif %}
+          <p>No products found in this collection.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
-  </div>
 </section>
+
 
 <style>
    .featured-products-section-container {
@@ -59,7 +81,7 @@
      padding: 1rem;
      border-radius: 10px;
      overflow: clip;
-     transition: all ease-in-out 100ms;
+     transition: box-shadow ease-in-out 100ms;
     
       .featured-product-card-image-container {
         width: 100%;
@@ -67,8 +89,7 @@
       }
     }
    .featured-product-card:hover {
-      transform: scale(1.01);
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 12px 0px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 20px 0px;
     }
     .featured-product-card-details {
         margin-top: .5rem;
@@ -87,6 +108,28 @@
         font-weight: 600;
   }
 
+  .featured-card-add-to-cart-btn {
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 50px;  
+    border: 1px solid black;
+    transition: background-color 200ms ease;
+    margin-top: 1.5rem;
+  }
+
+  .featured-card-add-to-cart-btn:hover {
+    background-color: var(--accent-color);
+  }
+
+  .featured-card-sold-out {
+    margin: 0;
+    margin-top: 1.5rem;
+    text-align: center;
+    border-radius: 50px;  
+    border: 1px solid #eee;
+    padding: 5px 0;
+  }
 
 
   @media (max-width: 992px) {

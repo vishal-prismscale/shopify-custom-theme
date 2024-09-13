@@ -1,0 +1,66 @@
+<!-- Basic Cart Page -->
+<h1>Your Cart</h1>
+
+<!-- Check if the cart is empty -->
+{% if cart.item_count == 0 %}
+  <p>Your cart is currently empty.</p>
+  <a href="/" class="btn">Continue Shopping</a>
+
+{% else %}
+  <!-- Loop through each item in the cart -->
+  {% for item in cart.items %}
+    <div class="cart-item">
+      <!-- Product Title, Variant, and Quantity -->
+      <p>
+        <strong>{{ item.product.title }}</strong>
+        {% if item.variant.title != 'Default Title' %}
+          - {{ item.variant.title }}
+        {% endif %}
+        <br>Quantity: {{ item.quantity }}
+      </p>
+
+      <!-- Product Image -->
+      <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}" height="100" width="100" />
+
+      <!-- Price and Total Price for this item -->
+      <p>Price: {{ item.line_price | money }}</p>
+
+      <!-- Check if the product is available before showing update/remove options -->
+      {% if item.variant.available %}
+        <!-- Form to update or remove this item -->
+        <form action="/cart/change" method="post">
+          <!-- Input for updating quantity -->
+          <label for="quantity-{{ item.key }}">Update Quantity:</label>
+          <input type="number" name="quantity" id="quantity-{{ item.key }}" value="{{ item.quantity }}" min="1">
+
+          <!-- Hidden field with item key -->
+          <input type="hidden" name="id" value="{{ item.key }}">
+
+          <!-- Update and Remove Buttons -->
+          <button type="submit">Update</button>
+          <button type="submit" name="quantity" value="0">Remove</button>
+        </form>
+      {% else %}
+        <!-- Product is sold out -->
+        <p class="sold-out">This product is sold out and cannot be updated.</p>
+        <!-- Remove button if sold out -->
+        <form action="/cart/change" method="post">
+          <input type="hidden" name="id" value="{{ item.key }}">
+          <button type="submit" name="quantity" value="0">Remove from Cart</button>
+        </form>
+      {% endif %}
+    </div>
+
+    <hr>
+  {% endfor %}
+
+  <!-- Cart Total -->
+  <div class="cart-total">
+    <p><strong>Subtotal:</strong> {{ cart.total_price | money }}</p>
+  </div>
+
+  <!-- Checkout Button -->
+  <div class="cart-checkout">
+    <a href="/checkout" class="btn">Proceed to Checkout</a>
+  </div>
+{% endif %}

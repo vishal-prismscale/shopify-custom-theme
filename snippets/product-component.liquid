@@ -5,8 +5,13 @@
   </div>
   <div class="product-price">{{ product.price | money }}</div>
   <div class="product-description">{{ product.description }}</div>
-  <form action="/cart/add" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-  </form>
+  
+  {% if product.variants.first.available %}
+    <form action="/cart/add" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+    </form>
+  {% else %}
+    <p class="sold-out">Sorry, this item is sold out.</p>
+  {% endif %}
 </section>
