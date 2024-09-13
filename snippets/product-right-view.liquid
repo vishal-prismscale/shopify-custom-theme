@@ -1,0 +1,44 @@
+<div class="product-right-view">
+  <p class="product-vendor">{{ product.vendor }}</p>
+  <h1 class="product-title">{{ product.title }}</h1>
+  <div class="product-price-wrapper">
+    {% if product.compare_at_price > product.price %}
+      <span class="product-stroke-price">{{ product.compare_at_price | money }}</span>
+    {% endif %}
+    <span class="product-price">{{ product.price | money }}</span>
+  </div>
+  <form method="post" action="/cart/add" id="product-form">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <lable id="product-quantity-label">Quantity</lable>
+    <div class="product-quantity-wrapper">
+      <button type="button" class="quantity-btn" id="decrease-btn">
+        {% render 'minus-icon' %}
+      </button>
+      <input min="1" type="hidden" id="quantity" name="quantity" value="1" readonly>
+      <span id="product-quantity-value">1</span>
+      <button type="button" class="quantity-btn" id="increase-btn">
+        {% render 'plus-icon' %}
+      </button>
+    </div>
+    <div class="product-button-wrapper">
+      <button class="product-buy-button" type="button">Buy Now</button>
+      <button
+        {% unless product.variants.first.available %}
+          disabled
+        {% endunless %}
+        type="submit"
+        class="product-add-to-cart-button"
+      >
+        {% if product.variants.first.available %}
+          Add to Cart
+        {% else %}
+          Out of Stock
+        {% endif %}
+      </button>
+    </div>
+  </form>
+  <div class="product-button-wrapper"></div>
+  <div class="product-description">
+    {{ product.description }}
+  </div>
+</div>

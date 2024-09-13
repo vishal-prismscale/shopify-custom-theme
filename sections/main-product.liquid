@@ -1,8 +1,18 @@
-{% render 'product-component' %}
+{{ '/main-product.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'main-product.js' | asset_url }}" defer></script>
+
+
+<section class="product-page-container">
+  {% render 'product-left-view' %}
+  {% render 'product-right-view' %}
+</section>
+
 
 {% schema %}
-  {
-    "name": "Main Product",
-    "settings": []
-  }
+{
+  "name": "Main Product",
+  "settings": [],
+  "blocks": []
+}
 {% endschema %}

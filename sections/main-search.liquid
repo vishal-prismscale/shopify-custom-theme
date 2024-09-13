@@ -1,0 +1,31 @@
+{% if search.results_count > 0 %}
+    {{ search.results |  json }}
+    {%  else  %}
+    <span>Nothing Found! for "{{ search.terms }}" keyword.</span>
+    
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Main Search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder Text",
+      "default": "Search for products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default Search",
+      "category": "Search",
+      "settings": {
+        "placeholder_text": "Search products..."
+      }
+    }
+  ]
+}
+
+{% endschema %}

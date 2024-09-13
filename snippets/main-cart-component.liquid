@@ -20,7 +20,7 @@
       </p>
 
       <!-- Product Image -->
-      <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}" height="100" width="100" />
+      <img src="{{ item.image | image_url }}" alt="{{ item.product.title }}" height="100" width="100" />
 
       <!-- Price and Total Price for this item -->
       <p>Price: {{ item.line_price | money }}</p>
