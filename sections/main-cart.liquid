@@ -1,3 +1,7 @@
+{{ '/main-cart.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'main-cart.js' | asset_url }}" defer></script>
+
 {%  render 'main-cart-component' %}
 
 {% schema %}

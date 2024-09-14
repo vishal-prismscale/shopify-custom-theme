@@ -7,60 +7,85 @@
   <a href="/" class="btn">Continue Shopping</a>
 
 {% else %}
-  <!-- Loop through each item in the cart -->
-  {% for item in cart.items %}
-    <div class="cart-item">
-      <!-- Product Title, Variant, and Quantity -->
-      <p>
-        <strong>{{ item.product.title }}</strong>
-        {% if item.variant.title != 'Default Title' %}
-          - {{ item.variant.title }}
-        {% endif %}
-        <br>Quantity: {{ item.quantity }}
-      </p>
-
-      <!-- Product Image -->
-      <img src="{{ item.image | image_url }}" alt="{{ item.product.title }}" height="100" width="100" />
-
-      <!-- Price and Total Price for this item -->
-      <p>Price: {{ item.line_price | money }}</p>
-
-      <!-- Check if the product is available before showing update/remove options -->
-      {% if item.variant.available %}
-        <!-- Form to update or remove this item -->
-        <form action="/cart/change" method="post">
-          <!-- Input for updating quantity -->
-          <label for="quantity-{{ item.key }}">Update Quantity:</label>
-          <input type="number" name="quantity" id="quantity-{{ item.key }}" value="{{ item.quantity }}" min="1">
-
-          <!-- Hidden field with item key -->
-          <input type="hidden" name="id" value="{{ item.key }}">
-
-          <!-- Update and Remove Buttons -->
-          <button type="submit">Update</button>
-          <button type="submit" name="quantity" value="0">Remove</button>
-        </form>
-      {% else %}
-        <!-- Product is sold out -->
-        <p class="sold-out">This product is sold out and cannot be updated.</p>
-        <!-- Remove button if sold out -->
-        <form action="/cart/change" method="post">
-          <input type="hidden" name="id" value="{{ item.key }}">
-          <button type="submit" name="quantity" value="0">Remove from Cart</button>
-        </form>
-      {% endif %}
+<div class="cart-container">
+  <div class="cart-item-details-wrapper">
+    <div class="cart-heading">
+      <span>Product</span>
+      <div class="cart-heading-right-section">
+        <span>Price</span>
+        <span>Quantity</span>
+        <span>Total</span>
+      </div>
     </div>
+    <div class="cart-data-list">
 
-    <hr>
-  {% endfor %}
+      {% for item in cart.items %}
 
-  <!-- Cart Total -->
-  <div class="cart-total">
-    <p><strong>Subtotal:</strong> {{ cart.total_price | money }}</p>
+        <div class="cart-data-wrapper">
+
+        <div class="cart-product">
+          <img
+            class="cart-product-image"
+            src="{{ item.product.featured_image | image_url }}"
+            alt=""
+            height="80"
+            width="80"
+          >
+          <div class="cart-item-title-and-vender">
+            <span class="cart-product-title">{{ item.product.title }}</span>
+            <span>{{ item.product.vendor }}</span>
+          </div>
+        </div>
+
+
+        <div class="cart-data-right-section">
+          <div class="cart-item-price">
+            <span class="cart-product-price">{{ item.product.price |  money }}</span>
+          </div>
+          <form action="/cart/change" method="post" class="cart-item-quantity">
+            <button type="button" class="quantity-btn" id="decrease-btn">
+              {% render 'minus-icon' %}
+            </button>
+            <input type="hidden" name="id" value="{{ item.key }}">
+            <input min="1" type="hidden" id="quantity" name="quantity" value="{{ item.quantity }}" readonly>
+            <span id="product-quantity-value">{{ item.quantity }}</span>
+            <button type="button" class="quantity-btn" id="increase-btn">
+              {% render 'plus-icon' %}
+            </button>
+          </form>
+        <div class="cart-item-line-price-and-action-button">
+          <div class="cart-item-total">
+            {{ item.line_price |  money }}
+          </div>
+          <form action="/cart/change" method="post">
+            <input type="hidden" name="id" value="{{ item.key }}">
+            <button type="submit" name="quantity" value="0" class="cart-remove-item">
+                {% render 'close-icon' %}
+            </button>
+          </form>
+        </div>
+        </div>
+
+        </div>
+
+      {% endfor %}
+    </div>
   </div>
 
-  <!-- Checkout Button -->
-  <div class="cart-checkout">
-    <a href="/checkout" class="btn">Proceed to Checkout</a>
+  <div class="cart-order-summary-wrapper">
+    <h2 class="cart-summary-heading">Order Summary</h2>
+    <div class="cart-subtotal-wrapper">
+      <span>Sub Total</span>
+      <span>{{ cart.items_subtotal_price |  money }}</span>
+    </div>
+    <div class="cart-total-wrapper">
+      <span>TOTAL</span>
+      <span>{{ cart.total_price |  money }}</span>
+    </div>
+    <div class="cart-checkout">
+      <a href="/checkout" class="btn">Proceed to Checkout</a>
+      <a href="/">Continue Shopping</a>
+    </div>
+  </div>
   </div>
 {% endif %}
