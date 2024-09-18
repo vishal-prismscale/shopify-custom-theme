@@ -6,9 +6,9 @@
     <p class="more-info-paragraph">
       {{ section.settings.more_info_paragraph }}
     </p>
-    <button class="more-info-button">
+     <a href="{{ section.settings.button_link }}" class="more-info-button">
       {{ section.settings.more_info_button }}
-    </button>
+    </a>
   </div>
 </section>
 
@@ -36,6 +36,7 @@
             transition: opacity .200ms ease-in;
             font-weight: 600;
             margin-top: 1.5rem;
+            width: fit-content;
         }
         .more-info-button:hover {
             opacity: .9;
@@ -96,6 +97,12 @@
       "id": "more_info_button",
       "label": "Button Text",
       "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
     },
     {
         "type": "select",

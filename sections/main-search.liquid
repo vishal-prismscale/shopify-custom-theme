@@ -1,9 +1,125 @@
-{% if search.results_count > 0 %}
-    {{ search.results |  json }}
-    {%  else  %}
-    <span>Nothing Found! for "{{ search.terms }}" keyword.</span>
-    
-{% endif %}
+<div class="search-results-wrapper">
+  {% if search.results_count > 0 %}
+    <h2>Search Results for "{{ search.terms }}"</h2>
+    <div class="product-grid">
+      {% for product in search.results %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            <div class="product-image-wrapper">
+                <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" height="50" width="50" class="product-image" />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <p class="product-price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <span class="no-results-message">Nothing Found for "{{ search.terms }}" keyword.</span>
+  {% endif %}
+</div>
+
+<style>
+  .search-results-wrapper {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-image-wrapper {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.1);
+  }
+
+  .product-info {
+    padding: 15px;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 10px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .product-price {
+    font-size: 1rem;
+    color: #777;
+  }
+
+  .no-results-message {
+    font-size: 1.2rem;
+    color: #ff4d4d;
+    margin-top: 30px;
+    display: inline-block;
+  }
+
+  @media screen and (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
 
 
 {% schema %}
@@ -27,5 +143,4 @@
     }
   ]
 }
-
 {% endschema %}

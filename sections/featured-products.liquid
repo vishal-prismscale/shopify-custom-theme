@@ -18,7 +18,11 @@
   <div class="featured-products-section-container">
     <div class="featured-products-section-wrapper">
       <h1 class="featured-products-section-title">
-        {{ section.settings.featured_products_section_title }}
+        {% if section.settings.featured_products_section_title %}
+          {{ section.settings.featured_products_section_title }}
+          {% else %}
+          Featured Products
+        {% endif %}
       </h1>
       <div class="featured-products-wrapper">
         {% if collection.size > 0 %}
@@ -168,7 +172,7 @@
     },
     {
       "type": "text",
-      "id": "fetatured_products_section_title",
+      "id": "featured_products_section_title",
       "label": "Section Title",
       "default": "Featured Products"
     },

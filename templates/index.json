@@ -15,12 +15,14 @@
         "more_info_paragraph": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos, officiis culpa est natus corporis dolores facilis nostrum quibusdam non dolor aliquid atque minus ex ullam neque cum a magnam quidem!",
         "paragraph_font_size": 20,
         "more_info_button": "Shop",
+        "button_link": "shopify:\/\/collections\/all",
         "content_alignment": "left"
       }
     },
     "featured-products": {
       "type": "featured-products",
       "settings": {
+        "collection_name": "",
         "background_color": "#ffffff",
         "text_color": "#000000",
         "fetatured_products_section_title": "Featured Products",
